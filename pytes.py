@@ -1,15 +1,24 @@
 import pytesseract
+import sys
 from PIL import Image  
 
+opsys = sys.platform
+print(opsys)
+
+if opsys == "linux":
+    try:
+        pytesseract.pytesseract.tesseract_cmd = r"/usr/bin/tesseract"
+    except:
+        pass
 
 
-#exe path for pytesseract
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 #gets picture and extract text
 img_file = "toyota_inv.png"
 img = Image.open(img_file)
 text = pytesseract.image_to_string(img)
+
+
 
 #check for txt file, create it if needed and write text to it
 try:
