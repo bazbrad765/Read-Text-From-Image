@@ -3,15 +3,23 @@ import sys
 from PIL import Image  
 
 opsys = sys.platform
-print(opsys)
-
-if opsys == "linux":
+if opsys == "linux" or opsys == "linux2":
     try:
         pytesseract.pytesseract.tesseract_cmd = r"/usr/bin/tesseract"
     except:
         pass
-
-
+elif opsys == "win32":
+    try:
+        pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+    except:
+        pass
+elif opsys == "darwin":
+    try:
+        pytesseract.pytesseract.tesseract_cmd = r"/usr/local/bin/tesseract"
+    except:
+        pass
+else:
+    print("Cannot find teseract ocr install - **please install to default location and try again**")
 
 #gets picture and extract text
 img_file = "toyota_inv.png"
