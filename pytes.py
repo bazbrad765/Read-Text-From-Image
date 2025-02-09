@@ -1,7 +1,7 @@
 import pytesseract
 import sys
-from PIL import Image  
-
+from PIL import Image
+from PIL import ImageEnhance                    
 opsys = sys.platform
 if opsys == "linux" or opsys == "linux2":
     try:
@@ -24,6 +24,15 @@ else:
 #gets picture and extract text
 img_file = "toyota_inv.png"
 img = Image.open(img_file)
+
+
+sharpener = ImageEnhance.Sharpness(img)
+for i in range(1):
+    sharpener.enhance(2.0).show()
+    img.save("newpic.png")
+
+
+
 text = pytesseract.image_to_string(img)
 
 
